@@ -25,7 +25,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
 save_dir = "../models/"
-os.makedirs(save_dir, exist_ok=True)  # creează folderul dacă nu există
+os.makedirs(save_dir, exist_ok=True)
 
 epochs = 10
 best_val_acc = 0.0
