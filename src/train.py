@@ -1,3 +1,4 @@
+import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -22,6 +23,9 @@ val_loader = create_dataloader(X_val_tensor, y_val_tensor, batch_size=32)
 model = NeuralNetwork(input_shape=28*28, output_shape=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=1e-3)
+
+save_dir = "../models/"
+os.makedirs(save_dir, exist_ok=True)  # creează folderul dacă nu există
 
 epochs = 10
 best_val_acc = 0.0
@@ -57,5 +61,6 @@ for epoch in range(epochs):
 
     if val_acc > best_val_acc:
         best_val_acc = val_acc
-        torch.save(model.state_dict(), "mnist_model_best.pth")
-        print(f"Saved new best model with val accuracy: {best_val_acc:.2f}%")
+        save_path = os.path.join(save_dir, "mnist_model_best.pth")
+        torch.save(model.state_dict(), save_path)
+        print(f"Saved new best model with val accuracy: {best_val_acc:.2f}% at {save_path}")
