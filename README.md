@@ -61,7 +61,7 @@ digit-recognizer/
 
 ```bash
 conda env create -f environment.yml
-conda activate digit-recognizer
+conda activate digit-recog
 ```
 
 ### 2. Train the Model (Optional)
