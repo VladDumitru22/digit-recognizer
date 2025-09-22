@@ -9,7 +9,8 @@ from tqdm import tqdm
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.manual_seed(42)
 
-path_train = r'../data/raw/mnist_train.csv'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+path_train = os.path.join(BASE_DIR, "../data/raw/mnist_train.csv")
 
 X, y = load_csv(path=path_train)
 X = normalize(X)

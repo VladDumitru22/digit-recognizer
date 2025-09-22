@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 from PIL import Image, ImageDraw, ImageOps
 import torch
@@ -7,8 +8,11 @@ import numpy as np
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+model_path = os.path.join(BASE_DIR, "../models/mnist_model_best.pth")
+
 model = NeuralNetwork(input_shape=784, output_shape=10).to(device)
-model.load_state_dict(torch.load("mnist_model_best.pth", map_location=device))
+model.load_state_dict(torch.load(model_path, map_location=device))
 model.eval()
 
 class DrawingApp:
