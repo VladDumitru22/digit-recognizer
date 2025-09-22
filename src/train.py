@@ -25,7 +25,8 @@ model = NeuralNetwork(input_shape=28*28, output_shape=10).to(device)
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=1e-3)
 
-save_dir = "../models/"
+save_dir = os.path.join(BASE_DIR, "../models")
+save_dir = os.path.abspath(save_dir)
 os.makedirs(save_dir, exist_ok=True)
 
 epochs = 10
@@ -62,6 +63,6 @@ for epoch in range(epochs):
 
     if val_acc > best_val_acc:
         best_val_acc = val_acc
-        save_path = os.path.join(save_dir, "mnist_model_best.pth")
+        save_path = os.path.join(save_dir, f"mnist_model_best.pth")
         torch.save(model.state_dict(), save_path)
         print(f"Saved new best model with val accuracy: {best_val_acc:.2f}% at {save_path}")
